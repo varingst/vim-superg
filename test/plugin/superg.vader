@@ -22,8 +22,6 @@ Before:
   call append(1, repeat([getline(1)], lines-1))
 
   map gG <Plug>SuperG
-  map <leader>$ <Plug>Super$
-  map <leader>_ <Plug>Super_
 
 Given:
   150 lines
@@ -50,77 +48,49 @@ Given:
   11th line
 
 Do:
-  9gG1gGdd8gGVggd
+" move to line 9
+  9gG
+" 1gG moves to line 11
+  1gG
+" delete line 11
+  dd
+" delete line 1-8
+  8gGdgg
 
-Expect (gG should move in normal mode):
+Expect (SuperG should move in normal mode):
   9th line
   10th line
 
 Do:
-  9gGV1gGd
+" move to line 9
+  9gG
+" visual linewise to line 11
+  V1gG
+" delete selection
+  d
+" move to line 7
+  7gG
+" visual linewise to line 1
+  V1gG
+" delete selection
+  d
 
-Expect(gG should move in visual mode):
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
 
-Do:
-  9gGd1gG
-
-Expect(gG should move in operator mode):
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
-  8 lines
+Expect(SuperG should move in visual mode):
   8 lines
 
 Do:
-  9\$x01\$x8GVggdjx\$x
+" move to line 9
+  9gG
+" delete {to line 11}
+  d1gG
+" move to line 7
+  7gG
+" delete {to line 1}
+  d1gG
 
-Expect (<leader>$ should move to end of closest line matching <count>$):
-  9th lin
-  0th lin
-  11th lin
-
-Do:
-  9G$v1\$d8Gdgg
-
-Expect (vmode <leader>$):
-  9th lin
-
-Do:
-  9G$d1\$8Gdgg
-
-Expect (omode <leader>$):
-  9th lin
-
-Do:
-  9\_x$1\_x8GVggdj$x\_x
-
-Expect (<leader>_ should move to start of closest line matching <count>$):
-  th line
-  0th lin
-  1th line
-
-Do:
-  9G$v1\_d8Gdgg
-
-Expect (vmode <leader>_):
-  9th lin1th line
-
-Do:
-  9G$d1\_8Gdgg
-
-Expect (omode <leader>_):
-  9th lin1th line
+Expect(SuperG should move in operator mode):
+  8 lines
 
 Given:
   100 lines
@@ -133,4 +103,3 @@ Execute (should use fallback on 0 count):
   let g:superg_fallback = "dd"
   exe "normal gG"
   AssertEqual 99, line('$')
-

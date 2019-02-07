@@ -6,14 +6,6 @@ nnoremap <expr><Plug>SuperG "\<ESC>".superg#G()
 vnoremap <expr><Plug>SuperG "\<ESC>gv".(mode()=="V"?"":"V").superg#G()
 onoremap <expr><Plug>SuperG "\<ESC>V".superg#G().v:operator
 
-nnoremap <expr><Plug>Super$ "\<ESC>".superg#N('j', 'k').'$'
-vnoremap <expr><Plug>Super$ "\<ESC>gv".superg#N('j', 'k').'$'
-onoremap <expr><Plug>Super$ "\<ESC>v".superg#N('j', 'k').'$'.v:operator
-
-nnoremap <expr><Plug>Super_ "\<ESC>".superg#N('j', 'k').'_'
-vnoremap <expr><Plug>Super_ "\<ESC>gv".superg#N('j', 'k').'_'
-onoremap <expr><Plug>Super_ "\<ESC>v".superg#N('j', 'k').'_'.v:operator
-
 function! superg#G() abort " {{{1
   let lnum = line('.')
   let l:count = v:count
@@ -22,16 +14,6 @@ function! superg#G() abort " {{{1
   endif
 
   return superg#(line('.'), v:count)."G"
-endfun
-
-function! superg#N(down, up, ...) abort " {{{1
-  let lnum = line('.')
-  let delta = lnum - superg#(lnum, v:count)
-  echo delta
-  if delta == 0
-    return a:0 ? a:1 : ''
-  endif
-  return printf(abs(delta).(delta < 0 ? a:down : a:up))
 endfun
 
 function! superg#(lnum, count) abort " {{{1
