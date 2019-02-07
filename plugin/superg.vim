@@ -3,7 +3,7 @@ if get(g:, 'superg_loaded') || v:version < 800
 endif
 
 nnoremap <expr><Plug>SuperG "\<ESC>".superg#G()
-vnoremap <expr><Plug>SuperG "\<ESC>gv".(mode()=="V"?"":"V").superg#G()
+vnoremap <expr><Plug>SuperG "\<ESC>V".superg#G()
 onoremap <expr><Plug>SuperG "\<ESC>V".superg#G().v:operator
 
 function! superg#G() abort " {{{1

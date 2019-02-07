@@ -76,6 +76,24 @@ Do:
   d
 
 
+Expect(SuperG should force linewise in visual mode):
+  8 lines
+
+Do:
+" move to line 9
+  9gG$
+" visual linewise to line 11
+  v1gG
+" delete selection
+  d
+" move to line 7
+  7gG
+" visual linewise to line 1
+  v1gG
+" delete selection
+  d
+
+
 Expect(SuperG should move in visual mode):
   8 lines
 

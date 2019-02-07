@@ -1,0 +1,27 @@
+*superg.txt*  Plugin for fast, simple, linewise movement
+
+INTRODUCTION                                              *superg*
+
+Go to closest line matching [count]$, default current line, on the first
+non-blank characther |linewise|. If 'startofline' not set, keep the same
+column. |superg| is one of the |jump-motions|.
+
+In visual mode, |superg| forces it to be |linewise-visual|.
+
+MAPPINGS                                         *superg-mappings*
+
+No mappings are provided by default.
+
+|:map| {lhs} <Plug>SuperG
+
+or |:nmap|, |:xmap|, |:omap| <Plug>SuperG individually.
+
+OPTIONS                                           *superg-options*
+
+You may override how |superg| behaves when it is not given a [count] by
+setting g:superg_fallback to an <expr> mapping:
+>
+  let g:superg_fallback = "dd"
+<
+This will make |superg| delete the current line when not given a [count].
+You might want something else.
