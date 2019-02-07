@@ -14,7 +14,7 @@ nnoremap <expr><Plug>Super_ "\<ESC>".superg#N('j', 'k').'_'
 vnoremap <expr><Plug>Super_ "\<ESC>gv".superg#N('j', 'k').'_'
 onoremap <expr><Plug>Super_ "\<ESC>v".superg#N('j', 'k').'_'.v:operator
 
-function! superg#G() " {{{1
+function! superg#G() abort " {{{1
   let lnum = line('.')
   let l:count = v:count
   if l:count == 0 && exists('g:superg_fallback')
@@ -24,7 +24,7 @@ function! superg#G() " {{{1
   return superg#(line('.'), v:count)."G"
 endfun
 
-function! superg#N(down, up, ...) " {{{1
+function! superg#N(down, up, ...) abort " {{{1
   let lnum = line('.')
   let delta = lnum - superg#(lnum, v:count)
   echo delta
@@ -34,7 +34,7 @@ function! superg#N(down, up, ...) " {{{1
   return printf(abs(delta).(delta < 0 ? a:down : a:up))
 endfun
 
-function! superg#(lnum, count) " {{{1
+function! superg#(lnum, count) abort " {{{1
   let max = line('$')
 
   if a:count <= 0 || a:count > max
@@ -73,3 +73,5 @@ function! superg#(lnum, count) " {{{1
           \ : lo
   endif
 endfun
+
+let g:superg_loaded = 1
