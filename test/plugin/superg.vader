@@ -23,6 +23,9 @@ Before:
 
   map gG <Plug>SuperG
 
+  map SOL <Plug>SuperSOL
+  map EOL <Plug>SuperEOL
+
 Given:
   150 lines
 
@@ -121,3 +124,96 @@ Execute (should use fallback on 0 count):
   let g:superg_fallback = "dd"
   exe "normal gG"
   AssertEqual 99, line('$')
+
+" EXPERIMENTAL PROTOTYPING
+
+Given:
+  appleorange
+    grapemelon
+  lemon
+
+Do:
+  fo
+  d2SOL
+
+Expect(SuperSOL handles indent):
+  applegrapemelon
+  lemon
+
+Given:
+  appleorange
+  grapemelon
+  lemon
+
+Do:
+  fo
+  d2SOL
+
+Expect(SuperSOL handles no indent):
+  applegrapemelon
+  lemon
+
+Do:
+  jfm
+  d1SOL
+
+Expect:
+  melon
+  lemon
+
+Do:
+  jfm
+  d1SOL
+
+Expect:
+  melon
+  lemon
+
+Do:
+  fo
+  dEOL
+
+Expect:
+  apple
+  grapemelon
+  lemon
+
+Do:
+  fo
+  d2EOL
+
+Expect:
+  apple
+  lemon
+
+Do:
+  jfm
+  d1EOL
+
+Expect:
+  appleorangemelon
+  lemon
+
+Do:
+  2EOLx
+  1SOLx
+
+Expect:
+  ppleorange
+  grapemelo
+  lemon
+
+Do:
+  fo
+  v2EOLd
+
+Expect:
+  applelemon
+
+Do:
+  jfm
+  v1SOLd
+
+Expect:
+  elon
+  lemon
